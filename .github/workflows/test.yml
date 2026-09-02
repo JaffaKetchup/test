@@ -46,11 +46,11 @@ jobs:
         - name: Build
           uses: actions/download-artifact@v8
           with:
-            path: e
+            path: artifacts/
             merge-multiple: true
         - name: Release
           uses: softprops/action-gh-release@v3
           with:
-            files: e/*
+            files: artifacts/*
             prerelease: ${{contains(github.ref_name, '-dev')}}
             generate_release_notes: true
