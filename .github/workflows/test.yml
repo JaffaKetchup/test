@@ -13,11 +13,11 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v6
         - name: Build
-          run: echo ${{ github.sha }} > Release.txt
+          run: echo ${{ github.sha }} > test/Release.txt
         - name: Upload as artifact
           uses: actions/upload-artifact@v7
           with:
-            path: Release.txt
+            path: test/Release.txt
             if-no-files-found: error
             archive: false
 
@@ -27,11 +27,11 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v6
         - name: Build
-          run: echo ${{ github.sha }} > Release2.txt
+          run: echo ${{ github.sha }} > test/Release2.txt
         - name: Upload as artifact
           uses: actions/upload-artifact@v7
           with:
-            path: Release2.txt
+            path: test/Release2.txt
             if-no-files-found: error
             archive: false
             
