@@ -7,21 +7,50 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+-dev.[0-9]+"
 
 jobs:
+    a:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v6
+        - name: Build
+          run: echo ${{ github.sha }} > Release.txt
+        - name: Upload as artifact
+          uses: actions/upload-artifact@v7
+          with:
+            path: Release.txt
+            if-no-files-found: error
+            archive: false
+
+    b:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v6
+        - name: Build
+          run: echo ${{ github.sha }} > Release2.txt
+        - name: Upload as artifact
+          uses: actions/upload-artifact@v7
+          with:
+            path: Release2.txt
+            if-no-files-found: error
+            archive: false
+            
     build:
       runs-on: ubuntu-latest
+      needs: [a, b]
       permissions:
         contents: write
       steps:
         - name: Checkout
           uses: actions/checkout@v6
         - name: Build
-          run: echo ${{ github.sha }} > Release.txt
-        - name: Test
-          run: cat Release.txt
+          uses: actions/download-artifact@v8
+          with:
+            path: e
+            merge-multiple: true
         - name: Release
           uses: softprops/action-gh-release@v3
           with:
-            files: |
-              Release.txt
+            files: e/*
             prerelease: ${{contains(github.ref_name, '-dev')}}
             generate_release_notes: true
