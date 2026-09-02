@@ -23,5 +23,5 @@ jobs:
           with:
             files: |
               Release.txt
-            prerelease: contains(github.ref_name, '-dev')
+            prerelease: ${{contains(github.ref_name, '-dev')}}
             generate_release_notes: true
