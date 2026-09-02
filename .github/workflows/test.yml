@@ -9,6 +9,8 @@ on:
 jobs:
     build:
       runs-on: ubuntu-latest
+      permissions:
+        contents: write
       steps:
         - name: Checkout
           uses: actions/checkout@v6
@@ -22,3 +24,4 @@ jobs:
             files: |
               Release.txt
             prerelease: contains(github.ref_name, '-dev')
+            generate_release_notes: true
