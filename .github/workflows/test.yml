@@ -52,14 +52,9 @@ jobs:
           with:
             path: artifacts/
             merge-multiple: true
+            skip-decompress: true
         - name: Display structure of downloaded files
           run: ls -R artifacts/
-        - name: Download 2
-          uses: actions/download-artifact@v8
-          with:
-            path: f/
-        - name: Display structure of downloaded files
-          run: ls -R f/
         - name: Release
           uses: ncipollo/release-action@v1
           with:
