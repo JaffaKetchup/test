@@ -56,7 +56,7 @@ jobs:
         - name: Display structure of downloaded files
           run: ls -R artifacts/
         - name: Release
-          uses: ncipollo/release-action@v1
+          uses: ncipollo/release-action@389305c50bc7406ce7e55077eb8b863e0f0a3083
           with:
             artifacts: artifacts/*.*
             prerelease: ${{contains(github.ref_name, '-dev')}}
