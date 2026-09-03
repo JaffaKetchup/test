@@ -46,6 +46,8 @@ jobs:
       needs: [a, b]
       permissions:
         contents: write
+        id-token: write
+        attestations: write
       steps:
         - name: Download
           uses: actions/download-artifact@v8
