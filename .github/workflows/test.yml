@@ -53,8 +53,9 @@ jobs:
             path: artifacts/
             merge-multiple: true
         - name: Release
-          uses: softprops/action-gh-release@v3
+          uses: ncipollo/release-action@v1
           with:
-            files: artifacts/*
+            artifacts: artifacts/*
             prerelease: ${{contains(github.ref_name, '-dev')}}
-            generate_release_notes: true
+            generateReleaseNotes: true
+            immutableCreate: true
