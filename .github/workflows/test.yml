@@ -16,10 +16,12 @@ jobs:
           run: mkdir test
         - name: Build
           run: echo ${{ github.sha }} > test/Release.txt
+        - name: Zip
+          run: zip -r web-demo.zip test/Release.txt
         - name: Upload as artifact
           uses: actions/upload-artifact@v7
           with:
-            path: test/Release.txt
+            path: web-demo.zip
             if-no-files-found: error
             archive: false
 
@@ -45,7 +47,7 @@ jobs:
       permissions:
         contents: write
       steps:
-        - name: Build
+        - name: Download
           uses: actions/download-artifact@v8
           with:
             path: artifacts/
