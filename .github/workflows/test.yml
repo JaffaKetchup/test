@@ -52,10 +52,18 @@ jobs:
           with:
             path: artifacts/
             merge-multiple: true
+        - name: Display structure of downloaded files
+          run: ls -R artifacts/
+        - name: Download 2
+          uses: actions/download-artifact@v8
+          with:
+            path: f/
+        - name: Display structure of downloaded files
+          run: ls -R f/
         - name: Release
           uses: ncipollo/release-action@v1
           with:
-            artifacts: artifacts/*
+            artifacts: artifacts/*.*
             prerelease: ${{contains(github.ref_name, '-dev')}}
             generateReleaseNotes: true
             immutableCreate: true
