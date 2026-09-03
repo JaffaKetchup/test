@@ -53,8 +53,9 @@ jobs:
             path: artifacts/
             merge-multiple: true
             skip-decompress: true
-        - name: Display structure of downloaded files
-          run: ls -R artifacts/
+        - uses: actions/attest@v4
+          with:
+            subject-path: artifacts/*.*
         - name: Release
           uses: ncipollo/release-action@389305c50bc7406ce7e55077eb8b863e0f0a3083
           with:
